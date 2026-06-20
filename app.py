@@ -3,8 +3,34 @@ import google.generativeai as genai
 import time
 import random
 
-# Sayfa ayarlarını siber temaya uygun yapıyoruz kanka
+# Sayfa ayarlarını yapıyoruz
 st.set_page_config(page_title="SÜPERZEKA v13 ULTRA PRO", page_icon="🤖", layout="wide")
+
+# 🎨 SİBER RENKLENDİRME (CSS) - Ekranı senin istediğin gibi simsiyah ve yeşil yapıyoruz kanka!
+st.markdown("""
+    <style>
+    /* Ana Arka Planı Simsiyah Yap */
+    .stApp {
+        background-color: #050505 !important;
+    }
+    /* Tüm Yazıları Siber Yeşil Yap */
+    h1, h2, h3, p, span, label {
+        color: #00ffcc !important;
+        font-family: 'Consolas', monospace !important;
+    }
+    /* Giriş Kutularının İçini Düzenle */
+    input {
+        background-color: #111111 !important;
+        color: white !important;
+        border: 1px solid #00ffcc !important;
+    }
+    /* Sol Menüyü (Sidebar) Karart */
+    [data-testid="stSidebar"] {
+        background-color: #111111 !important;
+        border-right: 1px solid #00ffcc;
+    }
+    </style>
+""", unsafe_gradient=True, unsafe_allow_html=True)
 
 # API Şifre Kontrolü
 try:
@@ -13,7 +39,7 @@ try:
 except Exception:
     st.error("API Anahtarı bulunamadı kanka!")
 
-# SİSTEM HAFIZASI (Session State) - Sitenin durumları unutmaması için
+# SİSTEM HAFIZASI (Session State)
 if "mod" not in st.session_state:
     st.session_state.mod = "ÖĞRENCİ"
 if "hata_sayaci" not in st.session_state:
@@ -21,7 +47,7 @@ if "hata_sayaci" not in st.session_state:
 if "guvenlik_kilidi" not in st.session_state:
     st.session_state.guvenlik_kilidi = False
 
-# Bilgi Havuzu (Senin kodundaki gunun_bilgileri)
+# Bilgi Havuzu
 gunun_bilgileri = [
     "Işık, Güneş'ten Dünya'ya 8 dakikada ulaşır.",
     "Harezmi sıfırı bulan kişidir.",
@@ -29,28 +55,24 @@ gunun_bilgileri = [
 ]
 
 # --- SOL PANEL (SIDEBAR) ---
-st.sidebar.title("🤖 SÜPERZEKA v13 ULTRA PRO")
+st.sidebar.title("🤖 SÜPERZEKA v13")
 st.sidebar.subheader("Mimar: Yağızalp Karaman")
 st.sidebar.markdown("---")
 
 # ⏱️ POMODORO SAYAÇ SİSTEMİ
 st.sidebar.header("⏱️ Pomodoro Sayacı")
 pomodoro_durumu = st.sidebar.radio("Sayaç Durumu:", ["Mola Veriliyor ☕", "Ders Çalışılıyor ✍️"])
-if pomodoro_durumu == "Ders Çalışılıyor ✍️":
-    st.sidebar.warning("⏱️ Ders: 25 Dakika Başladı! Odaklan kanka!")
-else:
-    st.sidebar.success("☕ Harika çalıştın! Mola zamanı.")
 
 st.sidebar.markdown("---")
 
-# 🔐 GÜVENLİK ANAHTARI SİSTEMİ (Dakika Şifresi)
+# 🔐 GÜVENLİK ANAHTARI SİSTEMİ
 st.sidebar.header("🔐 Güvenlik Paneli")
 st.sidebar.write(f"Mevcut Durum: **{st.session_state.mod} MODU**")
 
 if st.session_state.mod == "ÖĞRENCİ":
-    sifre_girisi = st.sidebar.text_input("Sistem Anahtarını Gir (Şu anki Dakika):", type="password")
+    # 1. İSTEK: "Şu anki dakika" yazısını sildik, yerine gizemli bir siber uyarı koyduk kanka!
+    sifre_girisi = st.sidebar.text_input("Sistem Güvenlik Anahtarını Girin:", type="password")
     if st.sidebar.button("Erişim İste 🔑"):
-        # Senin yazdığın o meşhur dakika kontrolü!
         su_anki_dakika = time.strftime("%M")
         if sifre_girisi == su_anki_dakika:
             st.session_state.mod = "ÖĞRETMEN"
@@ -72,8 +94,6 @@ else:
 # 👁️ GÖZ: Sabotaj Kilit Ekranı
 if st.session_state.guvenlik_kilidi:
     st.error("🚨🚨🚨 SİBER İHLAL: Üst üste 3 kez hatalı şifre girildi! Sistem kilitlendi!")
-    st.warning("👁️ GÖZ (Kamera) Devrede! Sabotajcının fotoğrafı sisteme kilitlendi.")
-    # Web kamerası üzerinden fotoğraf çekme özelliği kanka!
     foto = st.camera_input("Güvenlik doğrulaması için yüzünü göster kanka:")
     if foto:
         st.success("Kanıt kaydedildi! Giriş engellendi.")
@@ -84,34 +104,22 @@ st.code(f"""
 [SİSTEM LOGU]:
 🤖 SÜPERZEKA v13 Başlatıldı.
 👁️ Göz (Kamera) Aktif. | 👂 Kulak (Sesli Komut) Hazır.
-🧠 5 Yapay Zeka Beyni Çevrimiçi (Gemini, GPT-4o, Claude, Llama, DeepSeek).
+🧠 5 Yapay Zeka Beyni Çevrimiçi.
 💡 GÜNÜN BİLGİSİ: {random.choice(gunun_bilgileri)}
-""")
-
-# 🎙️ KULAK: Ses Tanıma Özelliği (Web uyumlu)
-st.subheader("🎙️ Sesli Komut (Kulak)")
-ses_aktif = st.checkbox("Kulak (Mikrofon) Açılsın mı kanka?")
-sesli_yazi = ""
-if ses_aktif:
-    st.info("Tarayıcının mikrofon iznini onayladıktan sonra konuşabilirsin kanka.")
-    ses_dosyasi = st.audio_input("Mikrofona konuş ve kaydet butonuna bas kanka:")
-    if ses_dosyasi:
-        sesli_yazi = " (Not: Sesli komut başarıyla algılandı!)"
+""", language="text")
 
 # ANA SORGULAMA ALANI
 st.subheader("🧠 Siber Asistan Sorgu Ekranı")
 user_input = st.text_input("SüperZeka'ya bir komut veya soru gönder kanka:", placeholder="Örn: Harezmi kimdir?")
 
-if st.button("Sorgula / Çalıştır 🚀") or sesli_yazi:
+if st.button("Sorgula / Çalıştır 🚀"):
     if user_input:
         with st.spinner("🧠 5 Yapay Zeka Beyni Ortak Karar Alıyor..."):
             try:
-                # Gerçek Gemini Motoru
                 model = genai.GenerativeModel("gemini-2.5-flash")
                 response = model.generate_content(user_input)
                 gemini_yaniti = response.text
                 
-                # Senin kodundaki o simüle edilen (mock) diğer 4 modelin yanıtları kanka!
                 gpt_yanit = "[GPT-4o Yanıtı]: API bağlanmadığı için bu model simüle ediliyor kanka."
                 claude_yanit = "[Claude-3 Yanıtı]: API bağlanmadığı için bu model simüle ediliyor kanka."
                 llama_yanit = "[Llama-3 Yanıtı]: API bağlanmadığı için bu model simüle ediliyor kanka."
@@ -119,13 +127,11 @@ if st.button("Sorgula / Çalıştır 🚀") or sesli_yazi:
 
                 st.markdown("---")
                 
-                # Seçilen moda göre ekrana yazdırma mantığı (Senin yazdığın sistemin aynısı!)
                 if st.session_state.mod == "ÖĞRENCİ":
                     st.success("🤖 SÜPERZEKA - 5 Model Ortak Kararı (İpucu):")
                     st.write(f"[Gemini Yanıtı]: {gemini_yaniti}")
                     st.info("💡 (Doğrudan formülü kullanma, mantığı yakala kanka!)")
                 else:
-                    # Öğretmen modu seçildiyse tüm modelleri alt alta döker!
                     st.success("👨‍🏫 SÜPERZEKA - ÖĞRETMEN MODU - TÜM MODEL RAPORLARI:")
                     st.write(f"[Gemini Yanıtı]: {gemini_yaniti}")
                     st.text(gpt_yanit)
