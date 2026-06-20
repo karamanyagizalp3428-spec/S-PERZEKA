@@ -18,7 +18,8 @@ if st.button("Soruyu Gönder 🚀"):
     if user_input:
         with st.spinner("Düşünüyorum..."):
             try:
-                model = genai.GenerativeModel("gemini-1.5-flash")
+                # En güncel kararlı modeli çağırıyoruz kanka
+                model = genai.GenerativeModel("gemini-2.5-flash")
                 response = model.generate_content(user_input)
                 st.success("🤖 Cevap:")
                 st.write(response.text)
