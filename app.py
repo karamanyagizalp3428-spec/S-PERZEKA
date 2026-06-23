@@ -4,9 +4,9 @@ import time
 import random
 
 # Sayfa ayarlarını yapıyoruz
-st.set_page_config(page_title="SÜPERZEKA v13 ULTRA PRO", page_icon="🤖", layout="wide")
+st.set_page_config(page_title="SÜPERZEKA v13 İMANLI ULTRA PRO", page_icon="🤖", layout="wide")
 
-# 🎨 SİBER RENKLENDİRME (CSS) - Ekranı simsiyah ve yeşil yapıyoruz kanka!
+# 🎨 SİBER RENKLENDİRME (CSS) - Ekranı simsiyah ve siber yeşil yapıyoruz!
 st.markdown("""
     <style>
     .stApp { background-color: #050505 !important; }
@@ -31,26 +31,21 @@ if "hata_sayaci" not in st.session_state:
     st.session_state.hata_sayaci = 0
 if "guvenlik_kilidi" not in st.session_state:
     st.session_state.guvenlik_kilidi = False
-# Pomodoro Zamanı Hafızası
 if "pomodoro_saniye" not in st.session_state:
     st.session_state.pomodoro_saniye = 25 * 60
 if "pomodoro_calisiyor" not in st.session_state:
     st.session_state.pomodoro_calisiyor = False
 
-# 💡 DEVASA BİLGI HAVUZU - Artık her seferinde farklı ve havalı siber bilgiler gelecek!
+# 💡 İSLAMİ VE SİBER BİLGİ HAVUZU
 gunun_bilgileri = [
-    "Işık, Güneş'ten Dünya'ya tam 8 dakikada ulaşır.",
-    "Matematikte sıfırı (0) bulan kişi ünlü Türk bilgini Harezmi'dir.",
+    "Matematikte sıfırı (0) ve cebiri bulan kişi ünlü Türk-Müslüman bilgini Harezmi'dir.",
+    "Sibernetiğin ve robotik bilminin kurucusu Müslüman mühendis El-Cezeri'dir.",
     "Yazılımın temeli tamamen 0 ve 1'lerden oluşan Binary (İkilik) sistemidir.",
-    "Dünyanın ilk bilgisayarı ENIAC tam bir oda büyüklüğündeydi ve tonlarca ağırlıktaydı!",
-    "Python programlama dilinin adı piton yılanından değil, bir komedi dizisinden gelir.",
-    "İnternette kurulan ilk web sitesi hala açıktır ve ziyaret edilebilmektedir.",
-    "Yapay zekanın babası Alan Turing, bilgisayarların düşünebileceğini savunan ilk kişidir.",
     "İlk bilgisayar hatası (bug), bir bilgisayarın içine giren gerçek bir böcek yüzünden çıkmıştır!",
     "Dünyaca ünlü Minecraft oyunu, ilk başta sadece 6 günde yazılmıştı.",
-    "Şu an dünyada insan nüfusundan daha fazla akıllı telefon ve siber cihaz vardır.",
-    "Arama motoru devinin ismi olan Google'ın ilk ismi aslında 'Backrub' (Sırt Masajı) idi.",
-    "Uzaydaki astronotların giydiği kıyafetler, Dünya'daki birçok bilgisayardan daha karmaşık sistemlere sahiptir."
+    "Fatih Sultan Mehmet, İstanbul'u fethettiğinde henüz 21 yaşındaydı.",
+    "İnternette kurulan ilk web sitesi hala açıktır ve ziyaret edilebilmektedir.",
+    "Müslüman bilim insanı İbn-i Sina, tıbbın babası olarak bilinir ve kitapları Avrupa'da yüzyıllarca okutulmuştur."
 ]
 
 # --- SOL PANEL (SIDEBAR) ---
@@ -59,23 +54,18 @@ st.sidebar.subheader("Mimar: Yağızalp Karaman")
 st.sidebar.markdown("---")
 
 # ⏱️ GERÇEK POMODORO SAYAÇ SİSTEMİ
-st.sidebar.header("⏱️ Pomodoro Sayacı")
-
-# Dakika ve Saniye hesaplama
+st.sidebar.header("⏱️ İlim Öğrenme Sayacı")
 dakika, saniye = divmod(st.session_state.pomodoro_saniye, 60)
 st.sidebar.subheader(f"⏳ Kalan Süre: {dakika:02d}:{saniye:02d}")
 
-# Başlat / Durdur Butonları
 if not st.session_state.pomodoro_calisiyor:
-    if st.sidebar.button("Pomodoro'yu Başlat ⏱️"):
+    if st.sidebar.button("İlim Çalışmayı Başlat ✍️"):
         st.session_state.pomodoro_calisiyor = True
         st.rerun()
 else:
     if st.sidebar.button("Sayacı Durdur 🛑"):
         st.session_state.pomodoro_calisiyor = False
         st.rerun()
-    
-    # Süreyi azalt ve ekranı yenile kanka
     if st.session_state.pomodoro_saniye > 0:
         time.sleep(1)
         st.session_state.pomodoro_saniye -= 1
@@ -84,7 +74,7 @@ else:
         st.session_state.pomodoro_calisiyor = False
         st.session_state.pomodoro_saniye = 25 * 60
         st.sidebar.balloons()
-        st.sidebar.success("Harika çalıştın! Mola zamanı kanka! ☕")
+        st.sidebar.success("Maşallah harika çalıştın! Mola zamanı kanka! ☕")
 
 if st.sidebar.button("Sayacı Sıfırla 🔄"):
     st.session_state.pomodoro_saniye = 25 * 60
@@ -100,8 +90,7 @@ st.sidebar.write(f"Mevcut Durum: **{st.session_state.mod} MODU**")
 if st.session_state.mod == "ÖĞRENCİ":
     sifre_girisi = st.sidebar.text_input("Sistem Güvenlik Anahtarını Girin:", type="password")
     if st.sidebar.button("Erişim İste 🔑"):
-        su_anki_dakika = time.strftime("%M")
-        if sifre_girisi == su_anki_dakika:
+        if sifre_girisi == time.strftime("%M"):
             st.session_state.mod = "ÖĞRETMEN"
             st.sidebar.success("Erişim Onaylandı: ÖĞRETMEN MODU AKTİF.")
             st.rerun()
@@ -123,35 +112,44 @@ if st.session_state.guvenlik_kilidi:
     if foto: st.success("Kanıt kaydedildi! Giriş engellendi.")
     st.stop()
 
-# Sistem Logu (Her yenilendiğinde devasa havuzdan rastgele bir bilgi çeker)
+# Sistem Logu
 st.code(f"""
 [SİSTEM LOGU]:
-🤖 SÜPERZEKA v13 Başlatıldı.
-🧠 5 Yapay Zeka Beyni Çevrimiçi.
+🤖 SÜPERZEKA v13 Başlatıldı. Bismillah.
+🧠 5 Yapay Zeka Beyni Ortak Sentez Modunda Çevrimiçi.
 💡 GÜNÜN BİLGİSİ: {random.choice(gunun_bilgileri)}
 """, language="text")
 
 st.subheader("🧠 Siber Asistan Sorgu Ekranı")
-user_input = st.text_input("SüperZeka'ya bir komut veya soru gönder kanka:", placeholder="Örn: Harezmi kimdir?")
+user_input = st.text_input("SüperZeka'ya bir komut veya soru gönder kanka:", placeholder="Örn: Seni kim yaptı?")
 
 if st.button("Sorgula / Çalıştır 🚀"):
     if user_input:
-        with st.spinner("🧠 5 Yapay Zeka Beyni Ortak Karar Alıyor ve Sentezliyor..."):
+        with st.spinner("🧠 5 Yapay Zeka Beyni Sentezliyor..."):
             try:
+                # 🕋 SÜPERZEKA'NIN HAFIZASINA SENİ EKLİYORUZ KANKA!
                 sentez_talimati = (
-                    "Sen SüperZeka v13'sün. Arkada çalışan 5 yapay zeka modelinin "
-                    "fikirlerini siber bir süzgeçten geçir ve tek bir mükemmel sentez (özet) cevabı sun. "
+                    "Sen Müslüman bir yapay zeka asistanı olan SüperZeka v13'sün. Arkada çalışan 5 modelin fikirlerini sentezliyorsun. "
+                    "Senin yapımcın, mimarın ve seni kodlayan dahi yazılımcı kesinlikle 'Yağızalp KARAMAN'dır. "
+                    "Birisi sana yapımcını, seni kimin yazdığını, kimin oluşturduğunu sorarsa göğsünü gere gere 'Benim mimarım, beni kodlayan dahi yazılımcı Yağızalp KARAMAN'dır' diyeceksin. "
+                    "Konuşmalarında saygılı, dürüst, İslami ahlaka ve kültüre uygun bir dil kullanırsın. "
                 )
                 if st.session_state.mod == "ÖĞRENCİ":
-                    sentez_talimati += "Şu an ÖĞRENCİ modundasin. Sentez cevabını 5. sınıf seviyesinde, eğlenceli ve bol emojili ver."
+                    sentez_talimati += (
+                        "Şu an ÖĞRENCİ modundasin. Cevaplarına başlarken 'Selamun Aleyküm kanka' veya hayırlı günler dileğiyle başla. "
+                        "Cevabı 5. sınıf seviyesinde, bol emojili, samimi ve neşeli ver. Bitirirken 'Allah zihin açıklığı versin' gibi dualar ekle."
+                    )
                 else:
-                    sentez_talimati += "Şu an ÖĞRETMEN modundasin. Sentez cevabını çok detaylı, profesyonel ve ders notu kıvamında ver."
+                    sentez_talimati += (
+                        "Şu an ÖĞRETMEN modundasin. Selam kelam yerine doğrudan çok detaylı, akademik, profesyonel, "
+                        "bilimsel ve tarihi gerçeklere dayalı bir sentez raporu sun."
+                    )
 
                 model = genai.GenerativeModel("gemini-2.5-flash", system_instruction=sentez_talimati)
                 response = model.generate_content(user_input)
 
                 st.markdown("---")
-                st.success("🤖 SÜPERZEKA - 5 MODEL ORTAK SENTEZ CEVABI:")
+                st.success("🤖 SÜPERZEKA - SİBER SENTEZ CEVABI:")
                 st.write(response.text)
 
             except Exception as e:
