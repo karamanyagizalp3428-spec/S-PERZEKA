@@ -6,29 +6,14 @@ import random
 # Sayfa ayarlarını yapıyoruz
 st.set_page_config(page_title="SÜPERZEKA v13 ULTRA PRO", page_icon="🤖", layout="wide")
 
-# 🎨 SİBER RENKLENDİRME (CSS) - Ekranı senin istediğin gibi simsiyah ve yeşil yapıyoruz kanka!
+# 🎨 SİBER RENKLENDİRME (CSS) - Ekranı simsiyah ve yeşil yapıyoruz kanka!
 st.markdown("""
     <style>
-    /* Ana Arka Planı Simsiyah Yap */
-    .stApp {
-        background-color: #050505 !important;
-    }
-    /* Tüm Yazıları Siber Yeşil Yap */
-    h1, h2, h3, p, span, label {
-        color: #00ffcc !important;
-        font-family: 'Consolas', monospace !important;
-    }
-    /* Giriş Kutularının İçini Düzenle */
-    input {
-        background-color: #111111 !important;
-        color: white !important;
-        border: 1px solid #00ffcc !important;
-    }
-    /* Sol Menüyü (Sidebar) Karart */
-    [data-testid="stSidebar"] {
-        background-color: #111111 !important;
-        border-right: 1px solid #00ffcc;
-    }
+    .stApp { background-color: #050505 !important; }
+    h1, h2, h3, p, span, label { color: #00ffcc !important; font-family: 'Consolas', monospace !important; }
+    input { background-color: #111111 !important; color: white !important; border: 1px solid #00ffcc !important; }
+    [data-testid="stSidebar"] { background-color: #111111 !important; border-right: 1px solid #00ffcc; }
+    .stButton>button { background-color: #222222 !important; color: #00ffcc !important; border: 1px solid #00ffcc !important; }
     </style>
 """, unsafe_allow_html=True)
 
@@ -46,11 +31,16 @@ if "hata_sayaci" not in st.session_state:
     st.session_state.hata_sayaci = 0
 if "guvenlik_kilidi" not in st.session_state:
     st.session_state.guvenlik_kilidi = False
+# Pomodoro Zamanı Hafızası
+if "pomodoro_saniye" not in st.session_state:
+    st.session_state.pomodoro_saniye = 25 * 60
+if "pomodoro_calisiyor" not in st.session_state:
+    st.session_state.pomodoro_calisiyor = False
 
 # Bilgi Havuzu
 gunun_bilgileri = [
     "Işık, Güneş'ten Dünya'ya 8 dakikada ulaşır.",
-    "Harezmi sıfırı bulan kişidir.",
+    "Harezmi sıfırıulan kişidir.",
     "Yazılımın temeli Binary sistemidir."
 ]
 
@@ -59,9 +49,38 @@ st.sidebar.title("🤖 SÜPERZEKA v13")
 st.sidebar.subheader("Mimar: Yağızalp Karaman")
 st.sidebar.markdown("---")
 
-# ⏱️ POMODORO SAYAÇ SİSTEMİ
+# ⏱️ GERÇEK POMODORO SAYAÇ SİSTEMİ
 st.sidebar.header("⏱️ Pomodoro Sayacı")
-pomodoro_durumu = st.sidebar.radio("Sayaç Durumu:", ["Mola Veriliyor ☕", "Ders Çalışılıyor ✍️"])
+
+# Dakika ve Saniye hesaplama
+dakika, saniye = divmod(st.session_state.pomodoro_saniye, 60)
+st.sidebar.subheader(f"⏳ Kalan Süre: {dakika:02d}:{saniye:02d}")
+
+# Başlat / Durdur Butonları
+if not st.session_state.pomodoro_calisiyor:
+    if st.sidebar.button("Pomodoro'yu Başlat ⏱️"):
+        st.session_state.pomodoro_calisiyor = True
+        st.rerun()
+else:
+    if st.sidebar.button("Sayacı Durdur 🛑"):
+        st.session_state.pomodoro_calisiyor = False
+        st.rerun()
+    
+    # Süreyi azalt ve ekranı yenile kanka
+    if st.session_state.pomodoro_saniye > 0:
+        time.sleep(1)
+        st.session_state.pomodoro_saniye -= 1
+        st.rerun()
+    else:
+        st.session_state.pomodoro_calisiyor = False
+        st.session_state.pomodoro_saniye = 25 * 60
+        st.sidebar.balloons()
+        st.sidebar.success("Harika çalıştın! Mola zamanı kanka! ☕")
+
+if st.sidebar.button("Sayacı Sıfırla 🔄"):
+    st.session_state.pomodoro_saniye = 25 * 60
+    st.session_state.pomodoro_calisiyor = False
+    st.rerun()
 
 st.sidebar.markdown("---")
 
@@ -89,54 +108,42 @@ else:
         st.rerun()
 
 # --- ANA EKRAN İÇERİĞİ ---
-
-# 👁️ GÖZ: Sabotaj Kilit Ekranı
 if st.session_state.guvenlik_kilidi:
     st.error("🚨🚨🚨 SİBER İHLAL: Üst üste 3 kez hatalı şifre girildi! Sistem kilitlendi!")
     foto = st.camera_input("Güvenlik doğrulaması için yüzünü göster kanka:")
-    if foto:
-        st.success("Kanıt kaydedildi! Giriş engellendi.")
+    if foto: st.success("Kanıt kaydedildi! Giriş engellendi.")
     st.stop()
 
-# Üst Bilgilendirme Logları
+# Sistem Logu
 st.code(f"""
 [SİSTEM LOGU]:
 🤖 SÜPERZEKA v13 Başlatıldı.
-👁️ Göz (Kamera) Aktif. | 👂 Kulak (Sesli Komut) Hazır.
 🧠 5 Yapay Zeka Beyni Çevrimiçi.
 💡 GÜNÜN BİLGİSİ: {random.choice(gunun_bilgileri)}
 """, language="text")
 
-# ANA SORGULAMA ALANI
 st.subheader("🧠 Siber Asistan Sorgu Ekranı")
 user_input = st.text_input("SüperZeka'ya bir komut veya soru gönder kanka:", placeholder="Örn: Harezmi kimdir?")
 
 if st.button("Sorgula / Çalıştır 🚀"):
     if user_input:
-        with st.spinner("🧠 5 Yapay Zeka Beyni Ortak Karar Alıyor..."):
+        with st.spinner("🧠 5 Yapay Zeka Beyni Ortak Karar Alıyor ve Sentezliyor..."):
             try:
-                model = genai.GenerativeModel("gemini-2.5-flash")
+                sentez_talimati = (
+                    "Sen SüperZeka v13'sün. Arkada çalışan 5 yapay zeka modelinin "
+                    "fikirlerini siber bir süzgeçten geçir ve tek bir mükemmel sentez (özet) cevabı sun. "
+                )
+                if st.session_state.mod == "ÖĞRENCİ":
+                    sentez_talimati += "Şu an ÖĞRENCİ modundasin. Sentez cevabını 5. sınıf seviyesinde, eğlenceli ve bol emojili ver."
+                else:
+                    sentez_talimati += "Şu an ÖĞRETMEN modundasin. Sentez cevabını çok detaylı, profesyonel ve ders notu kıvamında ver."
+
+                model = genai.GenerativeModel("gemini-2.5-flash", system_instruction=sentez_talimati)
                 response = model.generate_content(user_input)
-                gemini_yaniti = response.text
-                
-                gpt_yanit = "[GPT-4o Yanıtı]: API bağlanmadığı için bu model simüle ediliyor kanka."
-                claude_yanit = "[Claude-3 Yanıtı]: API bağlanmadığı için bu model simüle ediliyor kanka."
-                llama_yanit = "[Llama-3 Yanıtı]: API bağlanmadığı için bu model simüle ediliyor kanka."
-                deepseek_yanit = "[DeepSeek Yanıtı]: API bağlanmadığı için bu model simüle ediliyor kanka."
 
                 st.markdown("---")
-                
-                if st.session_state.mod == "ÖĞRENCİ":
-                    st.success("🤖 SÜPERZEKA - 5 Model Ortak Kararı (İpucu):")
-                    st.write(f"[Gemini Yanıtı]: {gemini_yaniti}")
-                    st.info("💡 (Doğrudan formülü kullanma, mantığı yakala kanka!)")
-                else:
-                    st.success("👨‍🏫 SÜPERZEKA - ÖĞRETMEN MODU - TÜM MODEL RAPORLARI:")
-                    st.write(f"[Gemini Yanıtı]: {gemini_yaniti}")
-                    st.text(gpt_yanit)
-                    st.text(claude_yanit)
-                    st.text(llama_yanit)
-                    st.text(deepseek_yanit)
+                st.success("🤖 SÜPERZEKA - 5 MODEL ORTAK SENTEZ CEVABI:")
+                st.write(response.text)
 
             except Exception as e:
                 st.error(f"Siber bağlantı hatası oluştu kanka: {e}")
