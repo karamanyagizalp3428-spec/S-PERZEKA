@@ -37,11 +37,20 @@ if "pomodoro_saniye" not in st.session_state:
 if "pomodoro_calisiyor" not in st.session_state:
     st.session_state.pomodoro_calisiyor = False
 
-# Bilgi Havuzu
+# 💡 DEVASA BİLGI HAVUZU - Artık her seferinde farklı ve havalı siber bilgiler gelecek!
 gunun_bilgileri = [
-    "Işık, Güneş'ten Dünya'ya 8 dakikada ulaşır.",
-    "Harezmi sıfırıulan kişidir.",
-    "Yazılımın temeli Binary sistemidir."
+    "Işık, Güneş'ten Dünya'ya tam 8 dakikada ulaşır.",
+    "Matematikte sıfırı (0) bulan kişi ünlü Türk bilgini Harezmi'dir.",
+    "Yazılımın temeli tamamen 0 ve 1'lerden oluşan Binary (İkilik) sistemidir.",
+    "Dünyanın ilk bilgisayarı ENIAC tam bir oda büyüklüğündeydi ve tonlarca ağırlıktaydı!",
+    "Python programlama dilinin adı piton yılanından değil, bir komedi dizisinden gelir.",
+    "İnternette kurulan ilk web sitesi hala açıktır ve ziyaret edilebilmektedir.",
+    "Yapay zekanın babası Alan Turing, bilgisayarların düşünebileceğini savunan ilk kişidir.",
+    "İlk bilgisayar hatası (bug), bir bilgisayarın içine giren gerçek bir böcek yüzünden çıkmıştır!",
+    "Dünyaca ünlü Minecraft oyunu, ilk başta sadece 6 günde yazılmıştı.",
+    "Şu an dünyada insan nüfusundan daha fazla akıllı telefon ve siber cihaz vardır.",
+    "Arama motoru devinin ismi olan Google'ın ilk ismi aslında 'Backrub' (Sırt Masajı) idi.",
+    "Uzaydaki astronotların giydiği kıyafetler, Dünya'daki birçok bilgisayardan daha karmaşık sistemlere sahiptir."
 ]
 
 # --- SOL PANEL (SIDEBAR) ---
@@ -114,7 +123,7 @@ if st.session_state.guvenlik_kilidi:
     if foto: st.success("Kanıt kaydedildi! Giriş engellendi.")
     st.stop()
 
-# Sistem Logu
+# Sistem Logu (Her yenilendiğinde devasa havuzdan rastgele bir bilgi çeker)
 st.code(f"""
 [SİSTEM LOGU]:
 🤖 SÜPERZEKA v13 Başlatıldı.
