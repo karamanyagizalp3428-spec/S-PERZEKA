@@ -3,8 +3,8 @@ import google.generativeai as genai
 import time
 import random
 
-# Sayfa ayarlarını yapıyoruz
-st.set_page_config(page_title="SÜPERZEKA v13 İMANLI ULTRA PRO", page_icon="🤖", layout="wide")
+# Sayfa ayarlarını v14 PRO olarak güncelliyoruz kanka!
+st.set_page_config(page_title="SÜPERZEKA v14 PRO", page_icon="🤖", layout="wide")
 
 # 🎨 SİBER RENKLENDİRME (CSS) - Ekranı simsiyah ve siber yeşil yapıyoruz!
 st.markdown("""
@@ -49,7 +49,7 @@ gunun_bilgileri = [
 ]
 
 # --- SOL PANEL (SIDEBAR) ---
-st.sidebar.title("🤖 SÜPERZEKA v13")
+st.sidebar.title("🤖 SÜPERZEKA v14 PRO")
 st.sidebar.subheader("Mimar: Yağızalp Karaman")
 st.sidebar.markdown("---")
 
@@ -115,7 +115,7 @@ if st.session_state.guvenlik_kilidi:
 # Sistem Logu
 st.code(f"""
 [SİSTEM LOGU]:
-🤖 SÜPERZEKA v13 Başlatıldı. Bismillah.
+🤖 SÜPERZEKA v14 PRO Başlatıldı. Bismillah.
 🧠 5 Yapay Zeka Beyni Ortak Sentez Modunda Çevrimiçi.
 💡 GÜNÜN BİLGİSİ: {random.choice(gunun_bilgileri)}
 """, language="text")
@@ -127,9 +127,9 @@ if st.button("Sorgula / Çalıştır 🚀"):
     if user_input:
         with st.spinner("🧠 5 Yapay Zeka Beyni Sentezliyor..."):
             try:
-                # 🕋 SÜPERZEKA'NIN HAFIZASINA SENİ EKLİYORUZ KANKA!
+                # 🕋 SÜPERZEKA v14 PRO TALİMATLARI
                 sentez_talimati = (
-                    "Sen Müslüman bir yapay zeka asistanı olan SüperZeka v13'sün. Arkada çalışan 5 modelin fikirlerini sentezliyorsun. "
+                    "Sen Müslüman bir yapay zeka asistanı olan SÜPERZEKA v14 PRO'sun. Arkada çalışan 5 modelin fikirlerini sentezliyorsun. "
                     "Senin yapımcın, mimarın ve seni kodlayan dahi yazılımcı kesinlikle 'Yağızalp KARAMAN'dır. "
                     "Birisi sana yapımcını, seni kimin yazdığını, kimin oluşturduğunu sorarsa göğsünü gere gere 'Benim mimarım, beni kodlayan dahi yazılımcı Yağızalp KARAMAN'dır' diyeceksin. "
                     "Konuşmalarında saygılı, dürüst, İslami ahlaka ve kültüre uygun bir dil kullanırsın. "
@@ -149,7 +149,7 @@ if st.button("Sorgula / Çalıştır 🚀"):
                 response = model.generate_content(user_input)
 
                 st.markdown("---")
-                st.success("🤖 SÜPERZEKA - SİBER SENTEZ CEVABI:")
+                st.success("🤖 SÜPERZEKA v14 PRO - SİBER SENTEZ CEVABI:")
                 st.write(response.text)
 
             except Exception as e:
