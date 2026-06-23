@@ -3,7 +3,7 @@ import google.generativeai as genai
 import time
 import random
 
-# Sayfa ayarlarını v14 PRO olarak güncelliyoruz kanka!
+# Sayfa ayarlarını v14 PRO olarak güncelliyoruz
 st.set_page_config(page_title="SÜPERZEKA v14 PRO", page_icon="🤖", layout="wide")
 
 # 🎨 SİBER RENKLENDİRME (CSS) - Ekranı simsiyah ve siber yeşil yapıyoruz!
@@ -127,7 +127,7 @@ if st.button("Sorgula / Çalıştır 🚀"):
     if user_input:
         with st.spinner("🧠 5 Yapay Zeka Beyni Sentezliyor..."):
             try:
-                # 🕋 SÜPERZEKA v14 PRO TALİMATLARI
+                # 🕋 TALİMATLARI TAMAMEN v14 PRO YAPTIK KANKA!
                 sentez_talimati = (
                     "Sen Müslüman bir yapay zeka asistanı olan SÜPERZEKA v14 PRO'sun. Arkada çalışan 5 modelin fikirlerini sentezliyorsun. "
                     "Senin yapımcın, mimarın ve seni kodlayan dahi yazılımcı kesinlikle 'Yağızalp KARAMAN'dır. "
