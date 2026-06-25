@@ -6,14 +6,15 @@ import random
 # Sayfa ayarlarını v14 PRO olarak güncelliyoruz
 st.set_page_config(page_title="SÜPERZEKA v14 PRO", page_icon="🤖", layout="wide")
 
-# 🎨 SİBER RENKLENDİRME (CSS) - Ekranı simsiyah ve siber yeşil yapıyoruz!
+# 🎨 SİBER RENKLENDİRME (CSS)
 st.markdown("""
     <style>
     .stApp { background-color: #050505 !important; }
     h1, h2, h3, p, span, label { color: #00ffcc !important; font-family: 'Consolas', monospace !important; }
-    input { background-color: #111111 !important; color: white !important; border: 1px solid #00ffcc !important; }
+    input, textarea { background-color: #111111 !important; color: white !important; border: 1px solid #00ffcc !important; font-family: 'Consolas', monospace !important; }
     [data-testid="stSidebar"] { background-color: #111111 !important; border-right: 1px solid #00ffcc; }
     .stButton>button { background-color: #222222 !important; color: #00ffcc !important; border: 1px solid #00ffcc !important; }
+    .chat-box { background-color: #111111; border: 1px dashed #00ffcc; padding: 10px; border-radius: 5px; margin-bottom: 10px; }
     </style>
 """, unsafe_allow_html=True)
 
@@ -35,8 +36,13 @@ if "pomodoro_saniye" not in st.session_state:
     st.session_state.pomodoro_saniye = 25 * 60
 if "pomodoro_calisiyor" not in st.session_state:
     st.session_state.pomodoro_calisiyor = False
+# 💬 SOHBET GEÇMİŞİ HAFIZASI KANKA!
+if "sohbet_gecmisi" not in st.session_state:
+    st.session_state.sohbet_gecmisi = []
+if "canvas_icerik" not in st.session_state:
+    st.session_state.canvas_icerik = "# Burası senin Siber Canvas alanın kanka!\n\nKodlarını veya ödev metinlerini buraya yazıp sağ taraftan yapay zekaya düzenletebilirsin."
 
-# 💡 İSLAMİ VE SİBER BİLGİ HAVUZU
+# 💡 BİLGİ HAVUZLARI
 gunun_bilgileri = [
     "Matematikte sıfırı (0) ve cebiri bulan kişi ünlü Türk-Müslüman bilgini Harezmi'dir.",
     "Sibernetiğin ve robotik bilminin kurucusu Müslüman mühendis El-Cezeri'dir.",
@@ -48,12 +54,22 @@ gunun_bilgileri = [
     "Müslüman bilim insanı İbn-i Sina, tıbbın babası olarak bilinir ve kitapları Avrupa'da yüzyıllarca okutulmuştur."
 ]
 
+hadis_havuzu = [
+    "“Kolaylaştırınız, zorlaştırmayınız; müjdeleyiniz, nefret ettirmeyiniz.” (Buhârî)",
+    "“İki nimet vardır ki, insanların çoğu onları değerlendirmekte aldanmıştır: Sağlık ve boş vakit.” (Buhârî)",
+    "“Sizin en hayırlınız, ahlakı en güzel olanınızdır.” (Buhârî)",
+    "“Hiçbir baba, çocuğuna güzel terbiyeden daha kıymetli bir miras bırakamaz.” (Tirmizî)",
+    "“İlim öğrenmek, her Müslüman erkek ve kadına farzdır.” (İbn Mâce)",
+    "“Bizi aldatan bizden değildir.” (Müslim)",
+    "“Hakiki mümin, elinden ve dilinden insanların güvende olduğu kişidir.” (Tirmizî)"
+]
+
 # --- SOL PANEL (SIDEBAR) ---
 st.sidebar.title("🤖 SÜPERZEKA v14 PRO")
 st.sidebar.subheader("Mimar: Yağızalp Karaman")
 st.sidebar.markdown("---")
 
-# ⏱️ GERÇEK POMODORO SAYAÇ SİSTEMİ
+# ⏱️ POMODORO SAYAÇ SİSTEMİ
 st.sidebar.header("⏱️ İlim Öğrenme Sayacı")
 dakika, saniye = divmod(st.session_state.pomodoro_saniye, 60)
 st.sidebar.subheader(f"⏳ Kalan Süre: {dakika:02d}:{saniye:02d}")
@@ -81,35 +97,15 @@ if st.sidebar.button("Sayacı Sıfırla 🔄"):
     st.session_state.pomodoro_calisiyor = False
     st.rerun()
 
+# 🗑️ SOHBETİ SIFIRLAMA BUTONU
 st.sidebar.markdown("---")
-
-# 🔐 GÜVENLİK ANAHTARI SİSTEMİ
-st.sidebar.header("🔐 Güvenlik Paneli")
-st.sidebar.write(f"Mevcut Durum: **{st.session_state.mod} MODU**")
-
-if st.session_state.mod == "ÖĞRENCİ":
-    sifre_girisi = st.sidebar.text_input("Sistem Güvenlik Anahtarını Girin:", type="password")
-    if st.sidebar.button("Erişim İste 🔑"):
-        if sifre_girisi == time.strftime("%M"):
-            st.session_state.mod = "ÖĞRETMEN"
-            st.sidebar.success("Erişim Onaylandı: ÖĞRETMEN MODU AKTİF.")
-            st.rerun()
-        else:
-            st.session_state.hata_sayaci += 1
-            if st.session_state.hata_sayaci >= 3:
-                st.session_state.guvenlik_kilidi = True
-            st.sidebar.error(f"Hatalı şifre! ({st.session_state.hata_sayaci}/3)")
-else:
-    if st.sidebar.button("Öğrenci Moduna Dön 🎒"):
-        st.session_state.mod = "ÖĞRENCİ"
-        st.session_state.hata_sayaci = 0
-        st.rerun()
+if st.sidebar.button("Sohbet Geçmişini Temizle 🗑️"):
+    st.session_state.sohbet_gecmisi = []
+    st.rerun()
 
 # --- ANA EKRAN İÇERİĞİ ---
 if st.session_state.guvenlik_kilidi:
-    st.error("🚨🚨🚨 SİBER İHLAL: Üst üste 3 kez hatalı şifre girildi! Sistem kilitlendi!")
-    foto = st.camera_input("Güvenlik doğrulaması için yüzünü göster kanka:")
-    if foto: st.success("Kanıt kaydedildi! Giriş engellendi.")
+    st.error("🚨🚨🚨 SİBER İHLAL! Sistem kilitlendi!")
     st.stop()
 
 # Sistem Logu
@@ -118,39 +114,64 @@ st.code(f"""
 🤖 SÜPERZEKA v14 PRO Başlatıldı. Bismillah.
 🧠 5 Yapay Zeka Beyni Ortak Sentez Modunda Çevrimiçi.
 💡 GÜNÜN BİLGİSİ: {random.choice(gunun_bilgileri)}
+🕋 GÜNÜN HADİS-İ ŞERİFİ: {random.choice(hadis_havuzu)}
 """, language="text")
 
-st.subheader("🧠 Siber Asistan Sorgu Ekranı")
-user_input = st.text_input("SüperZeka'ya bir komut veya soru gönder kanka:", placeholder="Örn: Seni kim yaptı?")
+st.markdown("---")
 
-if st.button("Sorgula / Çalıştır 🚀"):
-    if user_input:
-        with st.spinner("🧠 5 Yapay Zeka Beyni Sentezliyor..."):
-            try:
-                # 🕋 TALİMATLARI TAMAMEN v14 PRO YAPTIK KANKA!
-                sentez_talimati = (
-                    "Sen Müslüman bir yapay zeka asistanı olan SÜPERZEKA v14 PRO'sun. Arkada çalışan 5 modelin fikirlerini sentezliyorsun. "
-                    "Senin yapımcın, mimarın ve seni kodlayan dahi yazılımcı kesinlikle 'Yağızalp KARAMAN'dır. "
-                    "Birisi sana yapımcını, seni kimin yazdığını, kimin oluşturduğunu sorarsa göğsünü gere gere 'Benim mimarım, beni kodlayan dahi yazılımcı Yağızalp KARAMAN'dır' diyeceksin. "
-                    "Konuşmalarında saygılı, dürüst, İslami ahlaka ve kültüre uygun bir dil kullanırsın. "
-                )
-                if st.session_state.mod == "ÖĞRENCİ":
-                    sentez_talimati += (
-                        "Şu an ÖĞRENCİ modundasin. Cevaplarına başlarken 'Selamun Aleyküm kanka' veya hayırlı günler dileğiyle başla. "
-                        "Cevabı 5. sınıf seviyesinde, bol emojili, samimi ve neşeli ver. Bitirirken 'Allah zihin açıklığı versin' gibi dualar ekle."
+# 🖼️ EKRANI İKİYE BÖLÜYORUZ
+sol_ekran, sag_ekran = st.columns([1, 1])
+
+with sol_ekran:
+    st.subheader("📝 SÜPERZEKA Canvas")
+    st.session_state.canvas_icerik = st.text_area(
+        "Çalışma alanındaki kod veya metin:",
+        value=st.session_state.canvas_icerik,
+        height=400
+    )
+
+with sag_ekran:
+    st.subheader("🧠 Siber Asistan Sorgu Ekranı")
+    user_input = st.text_input("SüperZeka'ya bir komut gönder kanka:", placeholder="Yazıp Enter'a basabilirsin...")
+
+    if st.button("Sorgula / Çalıştır 🚀") or (user_input and ("son_sorgu" not in st.session_state or st.session_state.son_sorgu != user_input)):
+        if user_input:
+            st.session_state.son_sorgu = user_input
+            with st.spinner("🧠 Sentezleniyor..."):
+                try:
+                    # Eski konuşmaları da talimata ekliyoruz ki yapay zeka geçmişi hatırlasın!
+                    gecmis_metni = "\n".join([f"Kullanıcı: {q}\nSüperZeka: {a}" for q, a in st.session_state.sohbet_gecmisi[-5:]])
+                    
+                    sentez_talimati = (
+                        "Sen Müslüman bir yapay zeka asistanı olan SÜPERZEKA v14 PRO'sun. Arkada çalışan 5 modelin fikirlerini sentezliyorsun. "
+                        "Senin yapımcın, mimarın ve seni kodlayan dahi yazılımcı kesinlikle 'Yağızalp KARAMAN'dır. "
+                        "Birisi sana yapımcını, seni kimin yazdığını, kimin oluşturduğunu sorarsa göğsünü gere gere 'Benim mimarım, beni kodlayan dahi yazılımcı Yağızalp KARAMAN'dır' diyeceksin. "
+                        "Konuşmalarında saygılı, dürüst, İslami ahlaka ve kültüre uygun bir dil kullanırsın. "
+                        f"Şu an kullanıcının sol ekrandaki Canvas alanında şu içerik var:\n{st.session_state.canvas_icerik}\n"
+                        f"Sohbetin geçmiş turları şu şekildedir:\n{gecmis_metni}\n"
                     )
-                else:
-                    sentez_talimati += (
-                        "Şu an ÖĞRETMEN modundasin. Selam kelam yerine doğrudan çok detaylı, akademik, profesyonel, "
-                        "bilimsel ve tarihi gerçeklere dayalı bir sentez raporu sun."
-                    )
+                    
+                    if st.session_state.mod == "ÖĞRENCİ":
+                        sentez_talimati += (
+                            "Şu an ÖĞRENCİ modundasin. Cevabına 'Selamun Aleyküm kanka' veya hayırlı günler diyerek başla. "
+                            "Doğrudan tam çözümü kopyala-yapıştır yapma! Önce konuyu anlat, sonra '💡 İşte Siber İpucu:' ver. "
+                            "Cevabı bol emojili, samimi yaz. Bitirirken 'Allah zihin açıklığı versin' de."
+                        )
+                    else:
+                        sentez_talimati += "Şu an ÖĞRETMEN modundasin. Doğrudan akademik ve bilimsel cevap sun."
 
-                model = genai.GenerativeModel("gemini-2.5-flash", system_instruction=sentez_talimati)
-                response = model.generate_content(user_input)
+                    model = genai.GenerativeModel("gemini-2.5-flash", system_instruction=sentez_talimati)
+                    response = model.generate_content(user_input)
+                    
+                    # 💾 Konuşmayı hafızaya kaydediyoruz kanka!
+                    st.session_state.sohbet_gecmisi.append((user_input, response.text))
 
-                st.markdown("---")
-                st.success("🤖 SÜPERZEKA v14 PRO - SİBER SENTEZ CEVABI:")
-                st.write(response.text)
+                except Exception as e:
+                    st.error(f"Siber bağlantı hatası: {e}")
 
-            except Exception as e:
-                st.error(f"Siber bağlantı hatası oluştu kanka: {e}")
+    # 📜 SOHBET GEÇMİŞİNİ EKRANA BASMA ALANI
+    if st.session_state.sohbet_gecmisi:
+        st.write("💬 **Sohbet Akışı:**")
+        for q, a in reversed(st.session_state.sohbet_gecmisi): # En son konuşulan en üstte görünsün diye tersten yazdırıyoruz
+            st.markdown(f"<div class='chat-box'><b>👤 Sen:</b> {q}</div>", unsafe_allow_html=True)
+            st.markdown(f"<div class='chat-box' style='border-color: #00ff00;'><b>🤖 SÜPERZEKA:</b> {a}</div>", unsafe_allow_html=True)
