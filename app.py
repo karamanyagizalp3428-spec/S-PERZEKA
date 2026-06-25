@@ -13,14 +13,14 @@ st.markdown("""
     .stApp { background-color: #050505 !important; }
     
     /* Ekrandaki istisnasız tüm yazıları hacker yeşili yapıyoruz */
-    h1, h2, h3, h4, h5, h6, p, span, label, li { color: #00ffcc !important; font-family: 'Consolas', monospace !important; }
+    h1, h2, h3, h4, h5, h6, p, span, label, li, div, b, strong { color: #00ffcc !important; font-family: 'Consolas', monospace !important; }
     
     /* Girdi alanları ve metin kutuları */
     input, textarea { background-color: #111111 !important; color: #00ffcc !important; border: 1px solid #00ffcc !important; font-family: 'Consolas', monospace !important; }
     
-    /* Sol taraftaki siber menü */
+    /* Sol taraftaki siber menü ve içindeki TÜM gizli yazılar (b, strong, span dahil) */
     [data-testid="stSidebar"] { background-color: #0c0c0c !important; border-right: 2px solid #00ffcc; }
-    [data-testid="stSidebar"] p, [data-testid="stSidebar"] span, [data-testid="stSidebar"] label { color: #00ffcc !important; }
+    [data-testid="stSidebar"] * { color: #00ffcc !important; font-family: 'Consolas', monospace !important; }
     
     /* Siber Butonlar */
     .stButton>button { background-color: #1a1a1a !important; color: #00ffcc !important; border: 1px solid #00ffcc !important; width: 100%; }
@@ -28,7 +28,7 @@ st.markdown("""
     
     /* Mesaj kutuları ve bilgi paneli yazıları */
     .chat-box { background-color: #111111; border: 1px dashed #00ffcc; padding: 12px; border-radius: 8px; margin-top: 10px; margin-bottom: 10px; color: #00ffcc !important; }
-    .status-panel { background-color: #002211; padding: 10px; border-radius: 5px; border: 1px solid #00ffcc; text-align: center; margin-bottom: 15px; }
+    .status-panel { background-color: #002211 !important; padding: 10px; border-radius: 5px; border: 1px solid #00ffcc; text-align: center; margin-bottom: 15px; }
     .logo-kutusu { background-color: #111; border: 2px solid #00ffcc; padding: 20px; border-radius: 10px; text-align: center; margin-bottom: 15px; }
     
     /* Kutunun içi simsiyah kalıyor, yazılar ve çizgiler tamamen hacker yeşili! */
@@ -123,7 +123,7 @@ st.code(f"""
 🕋 Hadis: {random.choice(hadis_havuzu)}
 """, language="text")
 
-# 💡 GÜNÜN HARİKA BİLGİSİ PANELİ (F-string hatasını çözmek için normal formatlama yaptık kanka!)
+# 💡 GÜNÜN HARİKA BİLGİSİ PANELİ
 secilen_bilgi = random.choice(gunun_bilgileri)
 st.markdown("""
     <div class='bilgi-paneli'>
