@@ -28,7 +28,7 @@ if "pomodoro_basladi" not in st.session_state: st.session_state.pomodoro_basladi
 
 # SIDEBAR: LOGO VE SİBER ÜS
 try:
-    st.sidebar.image("logo.png", use_column_width=True)
+    st.sidebar.image("edited-image.jpg", use_column_width=True)
 except:
     st.sidebar.error("Logo bulunamadı.")
 
