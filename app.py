@@ -37,16 +37,18 @@ if "pomodoro_calisiyor" not in st.session_state: st.session_state.pomodoro_calis
 if "canvas_icerik" not in st.session_state: 
     st.session_state.canvas_icerik = "# Siber Canvas\n\nBuraya ödevini veya kodunu yapıştır kanka!"
 
-# ☁️ BULUT BULUCU LOGİN SİSTEMİ
-if "bulut_kullanici" not in st.session_state:
-    st.session_state.bulut_kullanici = None
-if "bulut_veritabani" not in st.session_state:
-    # Sahte bulut veritabanı (İleride API'ye bağlanacak alan kanka)
-    st.session_state.bulut_veritabani = {}
+# ☁️ BULUT HAFIZA SİSTEMİ
+if "bulut_kullanici" not in st.session_state: st.session_state.bulut_kullanici = None
+if "bulut_veritabani" not in st.session_state: st.session_state.bulut_veritabani = {}
 
-# --- VERİ HAVUZLARI ---
-gunun_bilgileri = ["Sıfırı Harezmi buldu.", "İlk robotu El-Cezeri yaptı.", "Yazılım Binary (0-1) sistemidir."]
-hadis_havuzu = ["“İlim öğrenmek her Müslümana farzdır.”", "“Kolaylaştırınız, zorlaştırmayınız.”"]
+# --- GENİŞLETİLMİŞ VERİ HAVUZLARI ---
+gunun_bilgileri = [
+    "🤖 **Yapay Zekanın Temelleri:** Yapay zeka kavramı ilk kez 1956 yılında Dartmouth Konferansı'nda ortaya atılmıştır. Bu alandaki çalışmalar, insan zekasını taklit eden algoritmaların geliştirilmesine odaklanmaktadır. Günümüzde makine öğrenimi ve derin öğrenme teknikleri sayesinde yapay zeka sistemleri görüntü tanıma, dil çevirisi ve oyun oynama gibi karmaşık görevleri başarıyla yerine getirebilmektedir. Gelecekte yapay zekanın sağlık, eğitim, ulaşım ve daha birçok alanda devrim yaratması beklenmektedir.",
+    "🌐 **İnternet Tarihi ve Gelişimi:** İnternetin kökenleri 1960'lara dayanır. Başlangıçta ABD Savunma Bakanlığı tarafından geliştirilen ARPANET projesiyle bilgisayarlar arasında iletişim kurulması amaçlanmıştır. 1990'larda World Wide Web'in (WWW) icadıyla internet halkın kullanımına açılmış ve küresel bir ağ haline gelmiştir. Günümüzde internet milyarlarca insanı birbirine bağlayan, bilgiye erişimi kolaylaştıran ve ticareti dönüştüren vazgeçilmez bir iletişim aracıdır.",
+    "🧠 **Beynimizin Sırları:** İnsan beyni, evrendeki en karmaşık organlardan biridir. Yaklaşık 86 milyar nöron içerir ve her an trilyonlarca sinirsel iletim gerçekleşir. Beynimiz düşünce, hafıza, duygu, hareket gibi tüm yaşamsal fonksiyonlarımızı kontrol eder. Bilim insanları hala beynin nasıl çalıştığını tam olarak çözebilmiş değildir.",
+    "🌌 **Uzayın Derinlikleri:** Evren, milyarlarca galaksi ve trilyonlarca yıldıza ev sahipliği yapar. Bilim insanları evrenin başlangıcı olan Büyük Patlama (Big Bang) teorisini geliştirdiler. Uzayda kara delikler, kuasarlar, nebülalar gibi pek çok ilginç gök cismi bulunur. Astronomlar teleskoplar ve uzay araçları sayesinde evrenin sırlarını çözmeye çalışırlar."
+]
+hadis_havuzu = ["“İlim öğrenmek her Müslümana farzdır.”", "“Kolaylaştırınız, zorlaştırmayınız.”", "“En hayırlınız, ahlakı en güzel olandır.”"]
 
 # --- SOL PANEL (SIDEBAR) ---
 st.sidebar.title("🤖 SÜPERZEKA v14 PRO")
@@ -60,7 +62,6 @@ if not st.session_state.bulut_kullanici:
             st.session_state.bulut_kullanici = kullanici_adi.strip().lower()
             if st.session_state.bulut_kullanici not in st.session_state.bulut_veritabani:
                 st.session_state.bulut_veritabani[st.session_state.bulut_kullanici] = []
-            st.sidebar.success(f"Bulut aktif: {st.session_state.bulut_kullanici}")
             st.rerun()
 else:
     st.sidebar.markdown(f"<div class='status-panel'>☁️ Bulut Oturumu: <b>{st.session_state.bulut_kullanici}</b></div>", unsafe_allow_html=True)
@@ -101,18 +102,20 @@ if st.sidebar.button("Sohbet Geçmişini Temizle 🗑️"):
 # --- ANA EKRAN ---
 if st.session_state.guvenlik_kilidi: st.error("🚨 SİSTEM KİLİTLENDİ!"); st.stop()
 
-st.image("sz_logo.png", use_container_width=True)
+# 🎯 1. ÇÖZÜM: DOĞRUDAN İNTERNET ÜZERİNDEN SİBER BEYİN LOGOSUNU ÇEKİYORUZ!
+st.image("https://images.squarespace-cdn.com/content/v1/5fdfa5e5a95cb84d5df33d90/1650893348633-8N1GZ4KAFCO72STIK6Z6/artificial+intelligence+brain.gif", use_container_width=True)
+
 st.code(f"""
 [SİSTEM LOGU] v14 PRO | Bulut Durumu: {"AKTİF" if st.session_state.bulut_kullanici else "ÇEVRİMDIŞI"}
 🕋 Hadis: {random.choice(hadis_havuzu)}
 """, language="text")
 
-with st.expander("💡 Günün Bilgileri", expanded=True):
+with st.expander("💡 Genişletilmiş Günün Bilgileri", expanded=True):
     for bilgi in gunun_bilgileri: st.markdown(f"- {bilgi}")
 
 st.markdown("---")
 
-# 🖼 *ÇİFT EKRAN*
+# 🖼️ ÇİFT EKRAN
 sol, sag = st.columns([1, 1])
 
 with sol:
@@ -126,7 +129,6 @@ with sag:
         u_input = st.text_input("SüperZeka'ya bir komut gönder kanka:", placeholder="Mesajını yaz ve Enter'a bas...")
         submit_button = st.form_submit_button(label="Sorgula / Çalıştır 🚀")
         
-    # Kullanıcı adını alıyoruz, giriş yapmadıysa 'misafir' yapıyoruz kanka
     aktif_user = st.session_state.bulut_kullanici if st.session_state.bulut_kullanici else "misafir"
     if aktif_user not in st.session_state.bulut_veritabani:
         st.session_state.bulut_veritabani[aktif_user] = []
@@ -149,12 +151,11 @@ with sag:
                 model = genai.GenerativeModel("gemini-2.5-flash", system_instruction=talimat)
                 res = model.generate_content(u_input)
                 
-                # ☁️ BULUT SİSTEMİNE KAYIT ATILIYOR!
                 st.session_state.bulut_veritabani[aktif_user].append((u_input, res.text))
                 st.rerun()
             except Exception as e: st.error(f"Bağlantı Hatası: {e}")
 
-    # 📜 BULUTTAN GELEN SOHBET AKIŞI
+    # 📜 BULUTTAN GEÇMİŞ SOHBET AKIŞI FİLTRELEME
     user_gecmis = st.session_state.bulut_veritabani[aktif_user]
     if user_gecmis:
         st.markdown("---")
@@ -167,5 +168,6 @@ with sag:
         else:
             st.write("💬 **Bulut Sohbet Akışı:**")
             for q, a in reversed(user_gecmis):
-                st.markdown(f"<div class='chat-box'>👤 <b>Sen:</b> {q}</div>", unsafe_allow_html=True)
-                st.markdown(f"<div class='chat-box' style='border-color:#00ffcc;'>🤖 <b>SÜPERZEKA:</b> {a}</div>", unsafe_allow_html=True)
+                if q and a:
+                    st.markdown(f"<div class='chat-box'>👤 <b>Sen:</b> {q}</div>", unsafe_allow_html=True)
+                    st.markdown(f"<div class='chat-box' style='border-color:#00ffcc;'>🤖 <b>SÜPERZEKA:</b> {a}</div>", unsafe_allow_html=True)
