@@ -79,5 +79,7 @@ with col_r:
             st.rerun()
         except: st.error("Bağlantı hatası!")
 
-    for q, a in reversed(st.session_state.gecmis):
-        st.markdown(f"<div class='chat-box'>👤 <b>Sen:</b> {q}<br><br>🤖 <b>SüperZeka:</b> {a}</div>", unsafe_allow_html=True)
+  # YENİ VE GÜVENLİ KISIM
+    if "gecmis" in st.session_state and isinstance(st.session_state.gecmis, list):
+        for q, a in reversed(st.session_state.gecmis):
+            st.markdown(f"<div class='chat-box'>👤 <b>Sen:</b> {q}<br><br>🤖 <b>SüperZeka:</b> {a}</div>", unsafe_allow_html=True)
