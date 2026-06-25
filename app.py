@@ -3,8 +3,8 @@ import google.generativeai as genai
 import time
 import random
 
-# Sayfa ayarlarını v14 PRO olarak güncelliyoruz
-st.set_page_config(page_title="SÜPERZEKA v14 PRO", page_icon="🤖", layout="wide")
+# Sayfa ayarlarını v20 PRO olarak güncelliyoruz
+st.set_page_config(page_title="SÜPERZEKA v20 PRO", page_icon="🤖", layout="wide")
 
 # 🎨 SİBER RENK DÜZELTME MERKEZİ (CSS)
 st.markdown("""
