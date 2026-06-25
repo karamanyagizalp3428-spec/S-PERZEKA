@@ -45,7 +45,7 @@ if "bulut_veritabani" not in st.session_state: st.session_state.bulut_veritabani
 gunun_bilgileri = [
     "🤖 **Yapay Zekanın Temelleri:** Yapay zeka kavramı ilk kez 1956 yılında Dartmouth Konferansı'nda ortaya atılmıştır. Bu alandaki çalışmalar, insan zekasını taklit eden algoritmaların geliştirilmesine odaklanmaktadır. Günümüzde makine öğrenimi ve derin öğrenme teknikleri sayesinde yapay zeka sistemleri görüntü tanıma, dil çevirisi ve oyun oynama gibi karmaşık görevleri başarıyla yerine getirebilmektedir. Gelecekte yapay zekanın sağlık, eğitim, ulaşım ve daha birçok alanda devrim yaratması beklenmektedir.",
     "🌐 **İnternet Tarihi ve Gelişimi:** İnternetin kökenleri 1960'lara dayanır. Başlangıçta ABD Savunma Bakanlığı tarafından geliştirilen ARPANET projesiyle bilgisayarlar arasında iletişim kurulması amaçlanmıştır. 1990'larda World Wide Web'in (WWW) icadıyla internet halkın kullanımına açılmış ve küresel bir ağ haline gelmiştir. Günümüzde internet milyarlarca insanı birbirine bağlayan, bilgiye erişimi kolaylaştıran ve ticareti dönüştüren vazgeçilmez bir iletişim aracıdır.",
-    "🧠 **Beynimizin Sırları:** İnsan beyni, evrendeki en karmaşık organlardan biridir. Yaklaşık 86 milyar nöron içerir ve her an trilyonlarca sinirsel iletim gerçekleşir. Beynimiz düşünce, hafıza, duygu, hareket gibi tüm yaşamsal fonksiyonlarımızı kontrol eder. Bilim insanları hala beynin nasıl çalıştığını tam olarak çözebilmiş değildir.",
+    "🧠 **Beynimizin Sırları:** İnsan beyni, evrendeki en karmaşık organlardan biridir. Yaklaşık 86 milyar nöron içerir ve her an trilyonlarca sinirsel iletim gerçekleşir. Beynimiz düşünce, hafıza, duygu, hareket gibi tüm yaşamsal fonksiyonlarimizi kontrol eder. Bilim insanları hala beynin nasıl çalıştığını tam olarak çözebilmiş değildir.",
     "🌌 **Uzayın Derinlikleri:** Evren, milyarlarca galaksi ve trilyonlarca yıldıza ev sahipliği yapar. Bilim insanları evrenin başlangıcı olan Büyük Patlama (Big Bang) teorisini geliştirdiler. Uzayda kara delikler, kuasarlar, nebülalar gibi pek çok ilginç gök cismi bulunur. Astronomlar teleskoplar ve uzay araçları sayesinde evrenin sırlarını çözmeye çalışırlar."
 ]
 hadis_havuzu = ["“İlim öğrenmek her Müslümana farzdır.”", "“Kolaylaştırınız, zorlaştırmayınız.”", "“En hayırlınız, ahlakı en güzel olandır.”"]
@@ -102,8 +102,8 @@ if st.sidebar.button("Sohbet Geçmişini Temizle 🗑️"):
 # --- ANA EKRAN ---
 if st.session_state.guvenlik_kilidi: st.error("🚨 SİSTEM KİLİTLENDİ!"); st.stop()
 
-# 🎯 1. ÇÖZÜM: DOĞRUDAN İNTERNET ÜZERİNDEN SİBER BEYİN LOGOSUNU ÇEKİYORUZ!
-st.image("https://images.squarespace-cdn.com/content/v1/5fdfa5e5a95cb84d5df33d90/1650893348633-8N1GZ4KAFCO72STIK6Z6/artificial+intelligence+brain.gif", use_container_width=True)
+# Garantili ve şık siber logo linki kanka!
+st.image("https://images.unsplash.com/photo-1617791160505-6f006e121980?auto=format&fit=crop&w=1000&q=80", use_container_width=True)
 
 st.code(f"""
 [SİSTEM LOGU] v14 PRO | Bulut Durumu: {"AKTİF" if st.session_state.bulut_kullanici else "ÇEVRİMDIŞI"}
