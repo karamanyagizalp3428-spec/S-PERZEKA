@@ -39,14 +39,20 @@ if "canvas_icerik" not in st.session_state: st.session_state.canvas_icerik = "# 
 if "bulut_kullanici" not in st.session_state: st.session_state.bulut_kullanici = None
 if "bulut_veritabani" not in st.session_state: st.session_state.bulut_veritabani = {}
 
-# --- BİLGİ HAVUZLARI ---
-gunun_bilgileri = ["🤖 YAPAY ZEKANIN TEMELLERİ: ...", "🌐 İNTERNET TARİHİ: ...", "🧠 BEYNİMİZİN SIRLARI: ...", "🌌 UZAY: ..."]
+# --- GÜNCELLENMİŞ BİLGİ HAVUZU ---
+gunun_bilgileri = [
+    "🤖 YAPAY ZEKANIN TEMELLERİ: 1956 Dartmouth Konferansı'ndan günümüze, makinelerin öğrenme ve problem çözme yeteneği her geçen gün devrimsel bir şekilde artıyor.",
+    "🌐 İNTERNET TARİHİ: 1960'lardaki ARPANET'ten günümüzün global World Wide Web ağına, bilgiye erişim artık ışık hızında.",
+    "🧠 BEYNİMİZİN SIRLARI: 86 milyar nöronluk biyolojik işlemcimiz, evrendeki en gelişmiş ve hala tam çözülememiş sistemdir.",
+    "🌌 UZAYIN DERİNLİKLERİ: 13.8 milyar yıllık evrenimiz, keşfedilmeyi bekleyen milyarlarca galaksi ve gizemle dolu.",
+    "💾 BİLGİSAYAR EVRİMİ: Odanın yarısını kaplayan ENIAC'tan cebimizdeki süper güçlere kadar, teknoloji dünyayı değiştirdi."
+]
 hadis_havuzu = ["“İlim öğrenmek her Müslümana farzdır.”", "“Kolaylaştırınız, zorlaştırmayınız.”", "“En hayırlınız, ahlakı en güzel olandır.”"]
 
 # --- SOL PANEL (SIDEBAR) ---
 st.sidebar.title("🤖 SÜPERZEKA v20 PRO")
-
 st.sidebar.header("☁️ SüperZeka Cloud Girişi")
+
 if not st.session_state.bulut_kullanici:
     kullanici_adi = st.sidebar.text_input("Siber Kullanıcı Adınız:", placeholder="Örn: yagizalp_pro")
     if st.sidebar.button("Bulut Hafızasına Bağlan ⚡"):
@@ -62,10 +68,7 @@ else:
         st.rerun()
 
 st.sidebar.markdown(f"<div class='status-panel'>Mevcut Mod: <b>{st.session_state.mod}</b></div>", unsafe_allow_html=True)
-
-# Arama Motoru
-st.sidebar.header("🔍 Konuşma Arama")
-arama_sorgusu = st.sidebar.text_input("Geçmiş konulardan bir kelime ara:", placeholder="Örn: Git...")
+arama_sorgusu = st.sidebar.text_input("🔍 Geçmiş konulardan bir kelime ara:", placeholder="Örn: Git...")
 
 # Mod Değiştirici
 st.sidebar.header("🔐 Mod Değiştirici")
@@ -74,7 +77,6 @@ if st.session_state.mod == "ÖĞRENCİ":
     if st.sidebar.button("Öğretmen Moduna Geç 🔑"):
         if sifre == time.strftime("%M"):
             st.session_state.mod = "ÖĞRETMEN"
-            st.session_state.hata_sayaci = 0
             st.rerun()
         else:
             st.session_state.hata_sayaci += 1
@@ -88,7 +90,6 @@ else:
 # --- ANA EKRAN ---
 if st.session_state.guvenlik_kilidi: st.error("🚨 SİSTEM KİLİTLENDİ!"); st.stop()
 
-# Dijital Tabela Logo
 st.markdown("""
     <div class='logo-kutusu'>
         <h1 style='font-size: 35px; margin: 0; padding: 5px;'>🧠 [ SÜPERZEKA v20 PRO ] 🧠</h1>
@@ -96,24 +97,20 @@ st.markdown("""
     </div>
 """, unsafe_allow_html=True)
 
-# Sistem Logu
 st.code(f"""
 [SİSTEM LOGU] v20 PRO | Bulut Durumu: {"AKTİF" if st.session_state.bulut_kullanici else "ÇEVRİMDIŞI"}
 🕋 Hadis: {random.choice(hadis_havuzu)}
 """, language="text")
 
-# 💡 BİLGİ PANELİ
-secilen_bilgi = random.choice(gunun_bilgileri)
+# BİLGİ PANELİ
 st.markdown(f"""
     <div class='bilgi-paneli'>
         <h3 style='margin: 0; padding-bottom: 8px; border-bottom: 1px dashed #00ffcc;'>💡 Günün Harika Bilgisi</h3>
-        <p style='margin-top: 12px;'>{secilen_bilgi}</p>
+        <p style='margin-top: 12px;'>{random.choice(gunun_bilgileri)}</p>
     </div>
 """, unsafe_allow_html=True)
 
 st.markdown("---")
-
-# 🖼️ ÇİFT EKRAN
 sol, sag = st.columns([1, 1])
 
 with sol:
