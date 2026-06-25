@@ -17,6 +17,7 @@ st.markdown("""
     .chat-box { background-color: #111111; border: 1px dashed #00ffcc; padding: 12px; border-radius: 8px; margin-top: 10px; margin-bottom: 10px; }
     .status-panel { background-color: #002211; padding: 10px; border-radius: 5px; border: 1px solid #00ffcc; text-align: center; margin-bottom: 15px; }
     .logo-kutusu { background-color: #111; border: 2px solid #00ffcc; padding: 20px; border-radius: 10px; text-align: center; margin-bottom: 15px; }
+    .bilgi-paneli { background-color: #0c0c0c; border: 1px solid #00ffcc; padding: 15px; border-radius: 8px; margin-top: 15px; margin-bottom: 15px; }
     </style>
 """, unsafe_allow_html=True)
 
@@ -36,12 +37,12 @@ if "canvas_icerik" not in st.session_state: st.session_state.canvas_icerik = "# 
 if "bulut_kullanici" not in st.session_state: st.session_state.bulut_kullanici = None
 if "bulut_veritabani" not in st.session_state: st.session_state.bulut_veritabani = {}
 
-# --- BİLGİ HAVUZLARI (Burayı düzelttim kanka!) ---
+# --- BİLGİ HAVUZLARI ---
 gunun_bilgileri = [
     "🤖 **Yapay Zekanın Temelleri:** Yapay zeka kavramı ilk kez 1956 yılında Dartmouth Konferansı'nda ortaya atılmıştır. Bu alandaki çalışmalar, insan zekasını taklit eden algoritmaların geliştirilmesine odaklanmaktadır. Günümüzde makine öğrenimi ve derin öğrenme teknikleri sayesinde yapay zeka sistemleri görüntü tanıma, dil çevirisi ve oyun oynama gibi karmaşık görevleri başarıyla yerine getirebilmektedir. Gelecekte yapay zekanın sağlık, eğitim, ulaşım ve daha birçok alanda devrim yaratması beklenmektedir.",
     "🌐 **İnternet Tarihi ve Gelişimi:** İnternetin kökenleri 1960'lara dayanır. Başlangıçta ABD Savunma Bakanlığı tarafından geliştirilen ARPANET projesiyle bilgisayarlar arasında iletişim kurulması amaçlanmıştır. 1990'larda World Wide Web'in (WWW) icadıyla internet halkın kullanımına açılmış ve küresel bir ağ haline gelmiştir. Günümüzde internet milyarlarca insanı birbirine bağlayan, bilgiye erişimi kolaylaştıran ve ticareti dönüştüren vazgeçilmez bir iletişim aracıdır.",
     "🧠 **Beynimizin Sırları:** İnsan beyni, evrendeki en karmaşık organlardan biridir. Yaklaşık 86 milyar nöron içerir ve her an trilyonlarca sinirsel iletim gerçekleşir. Beynimiz düşünce, hafıza, duygu, hareket gibi tüm yaşamsal fonksiyonlarımızı kontrol eder. Bilim insanları hala beynin nasıl çalıştığını tam olarak çözebilmiş değildir.",
-    "🌌 **Uzayın Derinlikleri:** Evren, milyarlarca galaksi ve trilyonlarca yıldıza ev sahipliği yapar. Bilim insanları evrenin başlangıcı olan Büyük Patlama (Big Bang) teorisini geliştirdiler. Uzayda kara delikler, kuasarlar, nebülalar gibi pek çok ilginç gök cismi bulunur. Astronomlar teleskoplar ve uzay araçları sayesinde evrenin sırlarını çözmeye çalışırlar."
+    "🌌 **Uzayın Derinlikleri:** Evren, milyarlarca galaksi ve trilyonlarca yıldıza ev sahipliği yapar. Bilim insanları evrenin başlangıcı olan Büyük Patlama (Big Bang) teorisini geliştirdiler. Uzayda kara delikler, kuasarlar, nebülalar gibi pek costly ilginç gök cismi bulunur. Astronomlar teleskoplar ve uzay araçları sayesinde evrenin sırlarını çözmeye çalışırlar."
 ]
 hadis_havuzu = ["“İlim öğrenmek her Müslümana farzdır.”", "“Kolaylaştırınız, zorlaştırmayınız.”", "“En hayırlınız, ahlakı en güzel olandır.”"]
 
@@ -105,9 +106,13 @@ st.code(f"""
 🕋 Hadis: {random.choice(hadis_havuzu)}
 """, language="text")
 
-# 💡 GÜNÜN BİLGİSİ PANELİ (Şimdi düzeldi, tıkır tıkır çalışacak kanka!)
-with st.expander("💡 Günün Harika Bilgisi", expanded=True):
-    st.info(random.choice(gunun_bilgileri))
+# ⭐ YENİ TASARIM: Expander kalktı, sabit şık bir siber panel geldi! Ok mok yok kanka!
+st.markdown(f"""
+    <div class='bilgi-paneli'>
+        <h3 style='margin: 0; padding-bottom: 8px; border-bottom: 1px dashed #00ffcc;'>💡 Günün Harika Bilgisi</h3>
+        <p style='margin-top: 10px; color: #fff !important;'>{random.choice(gunun_bilgileri)}</p>
+    </div>
+""", unsafe_allow_html=True)
 
 st.markdown("---")
 
