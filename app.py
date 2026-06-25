@@ -6,18 +6,35 @@ import random
 # Sayfa ayarlarını v14 PRO olarak güncelliyoruz
 st.set_page_config(page_title="SÜPERZEKA v14 PRO", page_icon="🤖", layout="wide")
 
-# 🎨 SİBER VE İSLAMİ TASARIM (CSS)
+# 🎨 SİBER RENK DÜZELTME MERKEZİ (CSS)
 st.markdown("""
     <style>
+    /* Tüm arka planı simsiyah yapıyoruz kanka */
     .stApp { background-color: #050505 !important; }
-    h1, h2, h3, p, span, label { color: #00ffcc !important; font-family: 'Consolas', monospace !important; }
-    input, textarea { background-color: #111111 !important; color: white !important; border: 1px solid #00ffcc !important; font-family: 'Consolas', monospace !important; }
+    
+    /* Ekrandaki istisnasız tüm yazıları hacker yeşili yapıyoruz */
+    h1, h2, h3, h4, h5, h6, p, span, label, li { color: #00ffcc !important; font-family: 'Consolas', monospace !important; }
+    
+    /* Girdi alanları ve metin kutuları */
+    input, textarea { background-color: #111111 !important; color: #00ffcc !important; border: 1px solid #00ffcc !important; font-family: 'Consolas', monospace !important; }
+    
+    /* Sol taraftaki siber menü */
     [data-testid="stSidebar"] { background-color: #0c0c0c !important; border-right: 2px solid #00ffcc; }
+    [data-testid="stSidebar"] p, [data-testid="stSidebar"] span, [data-testid="stSidebar"] label { color: #00ffcc !important; }
+    
+    /* Siber Butonlar */
     .stButton>button { background-color: #1a1a1a !important; color: #00ffcc !important; border: 1px solid #00ffcc !important; width: 100%; }
-    .chat-box { background-color: #111111; border: 1px dashed #00ffcc; padding: 12px; border-radius: 8px; margin-top: 10px; margin-bottom: 10px; }
+    .stButton>button:hover { background-color: #00ffcc !important; color: #050505 !important; }
+    
+    /* Mesaj kutuları ve bilgi paneli yazıları */
+    .chat-box { background-color: #111111; border: 1px dashed #00ffcc; padding: 12px; border-radius: 8px; margin-top: 10px; margin-bottom: 10px; color: #00ffcc !important; }
     .status-panel { background-color: #002211; padding: 10px; border-radius: 5px; border: 1px solid #00ffcc; text-align: center; margin-bottom: 15px; }
     .logo-kutusu { background-color: #111; border: 2px solid #00ffcc; padding: 20px; border-radius: 10px; text-align: center; margin-bottom: 15px; }
-    .bilgi-paneli { background-color: #0c0c0c; border: 1px solid #00ffcc; padding: 15px; border-radius: 8px; margin-top: 15px; margin-bottom: 15px; }
+    
+    /* ⭐ İŞTE BURASI: Kutunun içi simsiyah kalıyor, yazılar ve çizgiler tamamen hacker yeşili! */
+    .bilgi-paneli { background-color: #050505 !important; border: 1px solid #00ffcc; padding: 15px; border-radius: 8px; margin-top: 15px; margin-bottom: 15px; }
+    .bilgi-paneli h3 { color: #00ffcc !important; font-family: 'Consolas', monospace !important; }
+    .bilgi-paneli p { color: #00ffcc !important; font-family: 'Consolas', monospace !important; }
     </style>
 """, unsafe_allow_html=True)
 
@@ -39,10 +56,10 @@ if "bulut_veritabani" not in st.session_state: st.session_state.bulut_veritabani
 
 # --- BİLGİ HAVUZLARI ---
 gunun_bilgileri = [
-    "🤖 **Yapay Zekanın Temelleri:** Yapay zeka kavramı ilk kez 1956 yılında Dartmouth Konferansı'nda ortaya atılmıştır. Bu alandaki çalışmalar, insan zekasını taklit eden algoritmaların geliştirilmesine odaklanmaktadır. Günümüzde makine öğrenimi ve derin öğrenme teknikleri sayesinde yapay zeka sistemleri görüntü tanıma, dil çevirisi ve oyun oynama gibi karmaşık görevleri başarıyla yerine getirebilmektedir. Gelecekte yapay zekanın sağlık, eğitim, ulaşım ve daha birçok alanda devrim yaratması beklenmektedir.",
-    "🌐 **İnternet Tarihi ve Gelişimi:** İnternetin kökenleri 1960'lara dayanır. Başlangıçta ABD Savunma Bakanlığı tarafından geliştirilen ARPANET projesiyle bilgisayarlar arasında iletişim kurulması amaçlanmıştır. 1990'larda World Wide Web'in (WWW) icadıyla internet halkın kullanımına açılmış ve küresel bir ağ haline gelmiştir. Günümüzde internet milyarlarca insanı birbirine bağlayan, bilgiye erişimi kolaylaştıran ve ticareti dönüştüren vazgeçilmez bir iletişim aracıdır.",
-    "🧠 **Beynimizin Sırları:** İnsan beyni, evrendeki en karmaşık organlardan biridir. Yaklaşık 86 milyar nöron içerir ve her an trilyonlarca sinirsel iletim gerçekleşir. Beynimiz düşünce, hafıza, duygu, hareket gibi tüm yaşamsal fonksiyonlarımızı kontrol eder. Bilim insanları hala beynin nasıl çalıştığını tam olarak çözebilmiş değildir.",
-    "🌌 **Uzayın Derinlikleri:** Evren, milyarlarca galaksi ve trilyonlarca yıldıza ev sahipliği yapar. Bilim insanları evrenin başlangıcı olan Büyük Patlama (Big Bang) teorisini geliştirdiler. Uzayda kara delikler, kuasarlar, nebülalar gibi pek costly ilginç gök cismi bulunur. Astronomlar teleskoplar ve uzay araçları sayesinde evrenin sırlarını çözmeye çalışırlar."
+    "🤖 YAPAY ZEKANIN TEMELLERİ: Yapay zeka kavramı ilk kez 1956 yılında Dartmouth Konferansı'nda ortaya atılmıştır. Bu alandaki çalışmalar, insan zekasını taklit eden algoritmaların geliştirilmesine odaklanmaktadır. Günümüzde makine öğrenimi ve derin öğrenme teknikleri sayesinde yapay zeka sistemleri görüntü tanıma, dil çevirisi ve oyun oynama gibi karmaşık görevleri başarıyla yerine getirebilmektedir.",
+    "🌐 İNTERNET TARİHİ VE GELİŞİMİ: İnternetin kökenleri 1960'lara dayanır. Başlangıçta ABD Savunma Bakanlığı tarafından geliştirilen ARPANET projesiyle bilgisayarlar arasında iletişim kurulması amaçlanmıştır. 1990'larda World Wide Web'in (WWW) icadıyla internet halkın kullanımına açılmıştır.",
+    "🧠 BEYNİMİZİN SIRLARI: İnsan beyni, evrendeki en karmaşık organlardan biridir. Yaklaşık 86 milyar nöron içerir ve her an trilyonlarca sinirsel iletim gerçekleşir. Beynimiz düşünce, hafıza, duygu, hareket gibi tüm yaşamsal fonksiyonlarımızı kontrol eder.",
+    "🌌 UZAYIN DERİNLİKLERİ: Evren, milyarlarca galaksi ve trilyonlarca yıldıza ev sahipliği yapar. Bilim insanları evrenin başlangıcı olan Büyük Patlama (Big Bang) teorisini geliştirdiler. Uzayda kara delikler, kuasarlar, nebülalar gibi pek çok ilginç gök cismi bulunur."
 ]
 hadis_havuzu = ["“İlim öğrenmek her Müslümana farzdır.”", "“Kolaylaştırınız, zorlaştırmayınız.”", "“En hayırlınız, ahlakı en güzel olandır.”"]
 
@@ -95,8 +112,8 @@ if st.session_state.guvenlik_kilidi: st.error("🚨 SİSTEM KİLİTLENDİ!"); st
 # Dijital Tabela Logo
 st.markdown("""
     <div class='logo-kutusu'>
-        <h1 style='font-size: 40px; margin: 0;'>🧠 [ SÜPERZEKA v14 PRO ] 🧠</h1>
-        <p style='color: #00ffcc; margin-top: 10px;'>⚡ Mimar: Yağızalp Karaman | Siber Yapay Zeka Üssü ⚡</p>
+        <h1 style='font-size: 35px; margin: 0; padding: 5px;'>🧠 [ SÜPERZEKA v14 PRO ] 🧠</h1>
+        <p style='color: #00ffcc !important; margin-top: 10px; font-size: 14px;'>⚡ Mimar: Yağızalp Karaman | Siber Yapay Zeka Üssü ⚡</p>
     </div>
 """, unsafe_allow_html=True)
 
@@ -106,67 +123,7 @@ st.code(f"""
 🕋 Hadis: {random.choice(hadis_havuzu)}
 """, language="text")
 
-# ⭐ YENİ TASARIM: Expander kalktı, sabit şık bir siber panel geldi! Ok mok yok kanka!
+# 💡 GÜNÜN HARİKA BİLGİSİ PANELİ (Simsiyah kutu, parlayan hacker yeşili yazılar!)
 st.markdown(f"""
     <div class='bilgi-paneli'>
-        <h3 style='margin: 0; padding-bottom: 8px; border-bottom: 1px dashed #00ffcc;'>💡 Günün Harika Bilgisi</h3>
-        <p style='margin-top: 10px; color: #fff !important;'>{random.choice(gunun_bilgileri)}</p>
-    </div>
-""", unsafe_allow_html=True)
-
-st.markdown("---")
-
-# 🖼️ ÇİFT EKRAN
-sol, sag = st.columns([1, 1])
-
-with sol:
-    st.subheader("📝 Canvas")
-    st.session_state.canvas_icerik = st.text_area("Çalışma Alanı:", value=st.session_state.canvas_icerik, height=400)
-
-with sag:
-    st.subheader("🧠 Siber Sorgu Ekranı")
-    
-    with st.form(key="sorgu_formu", clear_on_submit=True):
-        u_input = st.text_input("SüperZeka'ya bir komut gönder kanka:", placeholder="Mesajını yaz ve Enter'a bas...")
-        submit_button = st.form_submit_button(label="Sorgula / Çalıştır 🚀")
-        
-    aktif_user = st.session_state.bulut_kullanici if st.session_state.bulut_kullanici else "misafir"
-    if aktif_user not in st.session_state.bulut_veritabani:
-        st.session_state.bulut_veritabani[aktif_user] = []
-
-    if submit_button and u_input:
-        with st.spinner("🧠 Sentezleniyor..."):
-            try:
-                gecmis_listesi = st.session_state.bulut_veritabani[aktif_user]
-                gecmis = "\n".join([f"Kullanıcı: {q}\nSüperZeka: {a}" for q, a in gecmis_listesi[-3:]])
-                
-                talimat = (
-                    f"Sen SÜPERZEKA v14 PRO'sun. Mimarin Yağızalp KARAMAN. Müslüman bir asistansın. "
-                    f"Canvas İçeriği: {st.session_state.canvas_icerik}\nGeçmiş: {gecmis}\n"
-                )
-                if st.session_state.mod == "ÖĞRENCİ":
-                    talimat += "Selamun aleyküm kanka diyerek başla. Doğrudan cevap verme, konuyu anlat ve '💡 Siber İpucu' ver. Samimi ol."
-                else:
-                    talimat += "ÖĞRETMEN modundasin. Selamsız, doğrudan, profesyonel tam cevap ver."
-
-                model = genai.GenerativeModel("gemini-2.5-flash", system_instruction=talimat)
-                res = model.generate_content(u_input)
-                
-                st.session_state.bulut_veritabani[aktif_user].append((u_input, res.text))
-                st.rerun()
-            except Exception as e: st.error(f"Bağlantı Hatası: {e}")
-
-    # 📜 SOHBET AKIŞI
-    user_gecmis = st.session_state.bulut_veritabani[aktif_user]
-    if user_gecmis:
-        st.markdown("---")
-        if arama_sorgusu:
-            for q, a in reversed(user_gecmis):
-                if arama_sorgusu.lower() in q.lower() or arama_sorgusu.lower() in a.lower():
-                    st.markdown(f"<div class='chat-box'>👤 <b>Sen:</b> {q}</div>", unsafe_allow_html=True)
-                    st.markdown(f"<div class='chat-box' style='border-color:#00ffcc;'>🤖 <b>SÜPERZEKA:</b> {a}</div>", unsafe_allow_html=True)
-        else:
-            for q, a in reversed(user_gecmis):
-                if q and a:
-                    st.markdown(f"<div class='chat-box'>👤 <b>Sen:</b> {q}</div>", unsafe_allow_html=True)
-                    st.markdown(f"<div class='chat-box' style='border-color:#00ffcc;'>🤖 <b>SÜPERZEKA:</b> {a}</div>", unsafe_allow_html=True)
+        <h3 style='margin: 0; padding-bottom: 8px; border
