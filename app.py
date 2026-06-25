@@ -36,12 +36,14 @@ if "canvas_icerik" not in st.session_state: st.session_state.canvas_icerik = "# 
 if "bulut_kullanici" not in st.session_state: st.session_state.bulut_kullanici = None
 if "bulut_veritabani" not in st.session_state: st.session_state.bulut_veritabani = {}
 
-# --- BİLGİ HAVUZLARI ---
+# --- BİLGİ HAVUZLARI (Burayı düzelttim kanka!) ---
 gunun_bilgileri = [
-    "🤖 **Yapay Zekanın Temelleri:** Yapay zeka kavramı ilk kez 1956 yılında Dartmouth Konferansı'nda ortaya atılmıştır. Bu alandaki çalışmalar, insan zekasını taklit eden algoritmaların geliştirilmesine odaklanmaktadır. Günümüzde makine öğrenimi ve derin öğrenme teknikleri sayesinde yapay zeka sistemleri görüntü tanıma, dil çevirisi ve oyun oynama gibi karmaşık görevleri başarıyla yerine getirebilmektedir.",
-    "🌐 **İnternet Tarihi ve Gelişimi:** İnternetin kökenleri 1960'lara dayanır. Başlangıçta ABD Savunma Bakanlığı tarafından geliştirilen ARPANET projesiyle bilgisayarlar arasında iletişim kurulması amaçlanmıştır. 1990'larda World Wide Web'in (WWW) icadıyla internet halkın kullanımına açılmıştır."
+    "🤖 **Yapay Zekanın Temelleri:** Yapay zeka kavramı ilk kez 1956 yılında Dartmouth Konferansı'nda ortaya atılmıştır. Bu alandaki çalışmalar, insan zekasını taklit eden algoritmaların geliştirilmesine odaklanmaktadır. Günümüzde makine öğrenimi ve derin öğrenme teknikleri sayesinde yapay zeka sistemleri görüntü tanıma, dil çevirisi ve oyun oynama gibi karmaşık görevleri başarıyla yerine getirebilmektedir. Gelecekte yapay zekanın sağlık, eğitim, ulaşım ve daha birçok alanda devrim yaratması beklenmektedir.",
+    "🌐 **İnternet Tarihi ve Gelişimi:** İnternetin kökenleri 1960'lara dayanır. Başlangıçta ABD Savunma Bakanlığı tarafından geliştirilen ARPANET projesiyle bilgisayarlar arasında iletişim kurulması amaçlanmıştır. 1990'larda World Wide Web'in (WWW) icadıyla internet halkın kullanımına açılmış ve küresel bir ağ haline gelmiştir. Günümüzde internet milyarlarca insanı birbirine bağlayan, bilgiye erişimi kolaylaştıran ve ticareti dönüştüren vazgeçilmez bir iletişim aracıdır.",
+    "🧠 **Beynimizin Sırları:** İnsan beyni, evrendeki en karmaşık organlardan biridir. Yaklaşık 86 milyar nöron içerir ve her an trilyonlarca sinirsel iletim gerçekleşir. Beynimiz düşünce, hafıza, duygu, hareket gibi tüm yaşamsal fonksiyonlarımızı kontrol eder. Bilim insanları hala beynin nasıl çalıştığını tam olarak çözebilmiş değildir.",
+    "🌌 **Uzayın Derinlikleri:** Evren, milyarlarca galaksi ve trilyonlarca yıldıza ev sahipliği yapar. Bilim insanları evrenin başlangıcı olan Büyük Patlama (Big Bang) teorisini geliştirdiler. Uzayda kara delikler, kuasarlar, nebülalar gibi pek çok ilginç gök cismi bulunur. Astronomlar teleskoplar ve uzay araçları sayesinde evrenin sırlarını çözmeye çalışırlar."
 ]
-hadis_havuzu = ["“İlim öğrenmek her Müslümana farzdır.”", "“Kolaylaştırınız, zorlaştırmayınız.”"]
+hadis_havuzu = ["“İlim öğrenmek her Müslümana farzdır.”", "“Kolaylaştırınız, zorlaştırmayınız.”", "“En hayırlınız, ahlakı en güzel olandır.”"]
 
 # --- SOL PANEL (SIDEBAR) ---
 st.sidebar.title("🤖 SÜPERZEKA v14 PRO")
@@ -89,21 +91,23 @@ else:
 # --- ANA EKRAN ---
 if st.session_state.guvenlik_kilidi: st.error("🚨 SİSTEM KİLİTLENDİ!"); st.stop()
 
-# ⭐ İNTERNETE BAĞLI OLMAYAN, ASLA BOZULMAYAN SİBER LOGO KUTUMUZ!
+# Dijital Tabela Logo
 st.markdown("""
     <div class='logo-kutusu'>
-        <h1 style='font-size: 50px; margin: 0;'>🧠 [ SÜPERZEKA v14 PRO ] 🧠</h1>
+        <h1 style='font-size: 40px; margin: 0;'>🧠 [ SÜPERZEKA v14 PRO ] 🧠</h1>
         <p style='color: #00ffcc; margin-top: 10px;'>⚡ Mimar: Yağızalp Karaman | Siber Yapay Zeka Üssü ⚡</p>
     </div>
 """, unsafe_allow_html=True)
 
+# Sistem Logu
 st.code(f"""
 [SİSTEM LOGU] v14 PRO | Bulut Durumu: {"AKTİF" if st.session_state.bulut_kullanici else "ÇEVRİMDIŞI"}
 🕋 Hadis: {random.choice(hadis_havuzu)}
 """, language="text")
 
-with st.expander("💡 Genişletilmiş Günün Bilgileri", expanded=True):
-    for bilgi in gunun_bilgileri: st.markdown(f"- {bilgi}")
+# 💡 GÜNÜN BİLGİSİ PANELİ (Şimdi düzeldi, tıkır tıkır çalışacak kanka!)
+with st.expander("💡 Günün Harika Bilgisi", expanded=True):
+    st.info(random.choice(gunun_bilgileri))
 
 st.markdown("---")
 
